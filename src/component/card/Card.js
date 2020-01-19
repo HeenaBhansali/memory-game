@@ -1,29 +1,23 @@
 import React from "react"
 import styles from "./Card.module.css"
+import { connect } from "react-redux"
+import { updateCurrentCardAction } from "../../actions/game"
 
 class Card extends React.Component {
-  constructor() {
-    super()
-
-    this.state = {
-      open: false
-    }
-  }
-
   handleOnClick = () => {
-    this.setState({
-      open: !this.state.open
-    })
+    console.log("cardVlue", this.props.cardValue, this.props.index)
+    this.props.dispatch(
+      updateCurrentCardAction(this.props.cardValue, this.props.index)
+    )
   }
 
   render() {
-    const { cardId } = this.props
     return (
       <div className={styles.card} onClick={this.handleOnClick}>
-        {this.state.open && cardId}
+        {this.props.cardOpened && this.props.cardValue}
       </div>
     )
   }
 }
 
-export default Card
+export default connect()(Card)
