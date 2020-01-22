@@ -32,13 +32,9 @@ export const successFullMatch = index => {
   }
 }
 
-export const unsuccessFullMatch = (index, dispatch) => {
-  setTimeout(
-    () =>
-      dispatch({
-        type: UNSUCCESSFULL_MATCH,
-        index
-      }),
-    5000
-  )
+export const unsuccessFullMatch = index => {
+  return {
+    type: UNSUCCESSFULL_MATCH,
+    index
+  }
 }

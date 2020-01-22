@@ -9,7 +9,8 @@ const initialState = {
   shuffledCards: [],
   noOfOpenedCards: 0,
   currentCard: { value: null, index: null },
-  matchedCards: new Array(16).fill(0)
+  matchedCards: new Array(16).fill(0),
+  noOfMoves: 0
 }
 
 const store = createStore(reducer, initialState, middleware)

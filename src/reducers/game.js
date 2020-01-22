@@ -12,31 +12,35 @@ const game = (state, action) => {
     case INITIALIZE_GAME_STATE:
       console.log("reducer")
       return {
-        shuffledCards: action.shuffledCards,
-        noOfOpenedCards: 0,
-        currentCard: { value: null, index: null },
-        matchedCards: new Array(16).fill(0)
+        ...state,
+        shuffledCards: action.shuffledCards
       }
     case OPEN_CARD:
       return { ...state, noOfOpenedCards: state.noOfOpenedCards + 1 }
     case UPDATE_CURRENT_CARD:
       return {
         ...state,
-        currentCard: { value: action.value, index: action.index }
+        currentCard: { value: action.value, index: action.index },
+        noOfMoves: state.noOfMoves + 1
       }
     case SUCCESSFULL_MATCH:
+      console.log("success")
+      console.log("currentcard", state.currentCard.index)
+      console.log("nextcard", action.index)
       let newArray = state.matchedCards
       newArray[state.currentCard.index] = 1
       newArray[action.index] = 1
       return {
         ...state,
         matchedCards: newArray,
-        currentCard: { value: null, index: null }
+        currentCard: { value: null, index: null },
+        noOfMoves: state.noOfMoves + 1
       }
     case UNSUCCESSFULL_MATCH:
       return {
         ...state,
         currentCard: { value: null, index: null }
+        // noOfMoves: state.noOfMoves + 1
       }
 
     default:

@@ -5,19 +5,17 @@ import {
 } from "../actions/game"
 
 const checkSuccessfulMatch = store => next => action => {
-  console.log(store.getState())
-  console.log("action", action)
   if (action.type === UPDATE_CURRENT_CARD) {
-    console.log("current card", store.getState().currentCard.value)
-    console.log("next card", action.value)
-    if (store.getState().currentCard.value === action.value) {
-      return store.dispatch(successFullMatch(action.index))
-    }
     if (store.getState().currentCard.value === null) {
       return next(action)
     }
-    unsuccessFullMatch(action.index, store.dispatch)
-    return next(action)
+
+    if (store.getState().currentCard.value === action.value) {
+      return store.dispatch(successFullMatch(action.index))
+    }
+    if (store.getState().currentCard.value !== action.value) {
+      store.dispatch(unsuccessFullMatch(action.index))
+    }
   }
   return next(action)
 }

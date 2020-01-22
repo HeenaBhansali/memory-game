@@ -2,6 +2,7 @@ import React from "react"
 import { connect } from "react-redux"
 import { initializeGameState } from "../../actions/game"
 import GameBoard from "./GameBoard"
+import styles from "./Game.module.css"
 
 const createCard = () => {
   const cards = []
@@ -19,12 +20,18 @@ class Game extends React.Component {
     super()
     this.state = {}
   }
+
   static getDerivedStateFromProps(props, state) {
     props.dispatch(initializeGameState(createCard()))
     return null
   }
+
   render() {
-    return <GameBoard />
+    return (
+      <div className={styles.board}>
+        <GameBoard />
+      </div>
+    )
   }
 }
 
