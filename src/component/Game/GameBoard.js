@@ -8,9 +8,8 @@ class GameBoard extends React.Component {
   render() {
     const { shuffledCards, matchedCards, currentCardIndex } = this.props
     return (
-      <div>
-        {this.props.matchedCards.indexOf(0) === -1 && this.props.noOfMoves}
-
+      <div className={styles.board}>
+        <h1 className={styles.flex1}>No of Moves : {this.props.noOfMoves}</h1>
         <div className={styles.game}>
           {shuffledCards.map((cardValue, index) => {
             let cardOpened = false
